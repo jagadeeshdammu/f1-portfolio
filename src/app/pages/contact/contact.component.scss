@@ -1,0 +1,33 @@
+.layout { display: grid; grid-template-columns: 1.3fr 1fr; gap: 22px; align-items: start; }
+
+.radio { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px 24px;
+  display: flex; flex-direction: column; }
+.radio-head { font-family: var(--display); font-size: 12px; letter-spacing: .25em; color: var(--muted); margin-bottom: 14px;
+  display: flex; align-items: center; gap: 10px; }
+.rec { width: 10px; height: 10px; border-radius: 50%; background: var(--red); animation: blink 1.2s infinite; }
+@keyframes blink { 50% { opacity: .2; } }
+label { font-weight: 700; margin: 12px 0 6px; }
+input, textarea { font: 500 17px var(--body); color: var(--text); background: #0f0f15; border: 1px solid var(--line);
+  border-radius: 10px; padding: 12px 14px; resize: vertical; transition: border-color .2s, box-shadow .2s; }
+input:focus, textarea:focus { outline: none; border-color: var(--red); box-shadow: 0 0 0 3px rgba(225,6,0,.2); }
+input.ng-invalid.ng-touched, textarea.ng-invalid.ng-touched { border-color: #ff6b62; }
+small { color: #ff8a84; margin-top: 4px; font-weight: 600; }
+.send { margin-top: 20px; justify-content: center; }
+.ok { color: var(--green); font-weight: 700; margin: 14px 0 0; }
+
+.side { display: flex; flex-direction: column; gap: 12px; }
+.chan { display: flex; gap: 14px; align-items: center; text-decoration: none; background: var(--panel);
+  border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 18px; transition: .2s; min-width: 0; }
+.chan:hover { border-color: var(--red); transform: translateX(4px); }
+.chan .ic { font-size: 24px; }
+.chan span:last-child { display: flex; flex-direction: column; color: var(--muted); overflow-wrap: anywhere; min-width: 0; }
+.chan b { color: var(--text); font-family: var(--display); font-size: 13px; letter-spacing: .1em; }
+
+.board { background: #050507; border: 1px solid var(--line); border-radius: var(--radius); padding: 8px 18px; margin-top: 4px; }
+.row { display: flex; justify-content: space-between; gap: 10px; padding: 10px 0; border-bottom: 1px dashed var(--line); }
+.row:last-child { border-bottom: 0; }
+.row span { color: var(--muted); }
+.row b { font-family: var(--display); font-size: 13px; text-align: right; }
+.green { color: var(--green); }
+
+@media (max-width: 860px) { .layout { grid-template-columns: 1fr; } }

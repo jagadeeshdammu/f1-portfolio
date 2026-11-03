@@ -1,0 +1,205 @@
+<div class="game" [class.racing]="state() === 'race'">
+  <canvas #cv role="img" aria-label="Top-down racing game. Drive through four sector gates to explore Dammu Jagadeesh's portfolio."></canvas>
+
+  <!-- ================= HUD ================= -->
+  <div class="hud-top">
+    <div class="brand"><span class="num">DJ</span><span class="brand-text">RACING</span></div>
+    <div class="pips" aria-label="Sectors cleared">
+      @for (g of gates; track g.code; let i = $index) {
+        <span class="pip" [class.done]="done()[i]" [style.--c]="g.color" [title]="g.title">{{ g.code }}</span>
+      }
+    </div>
+    <div class="actions">
+      <button type="button" class="hbtn" [class.on]="auto()" (click)="toggleAuto()" title="Let the car drive itself">
+        <span aria-hidden="true">🤖</span><span class="lbl">Auto-drive</span>
+      </button>
+      <button type="button" class="hbtn" (click)="toggleSound()" [attr.aria-label]="sound() ? 'Mute engine' : 'Engine sound on'">
+        {{ sound() ? '🔊' : '🔇' }}
+      </button>
+      <a class="hbtn classic" routerLink="/story"><span class="lbl">Classic site</span><span class="short">Site</span> →</a>
+    </div>
+  </div>
+
+  <div class="timing">
+    <div class="t-row"><small>LAP TIME</small><b #time>00:00.000</b></div>
+    <div class="t-row best"><small>BEST</small><span>{{ best() }}</span></div>
+    <div class="t-row"><small>SECTORS</small><span>{{ doneCount() }}/4</span></div>
+  </div>
+
+  <div class="speedo" aria-hidden="true">
+    <div class="gear" #gear>N</div>
+    <div class="spd"><b #speed>0</b><small>KM/H</small></div>
+    <div class="revbar"><span #rev></span></div>
+  </div>
+
+  <div class="toast" #toast aria-live="polite"></div>
+
+  @if (state() === 'race' && !touchedControls() && !auto()) {
+    <div class="hint">
+      <span class="keys"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> or arrow keys to drive</span>
+      <span>Hit the glowing gates to unlock each sector · or press 🤖 Auto-drive</span>
+    </div>
+  }
+
+  <!-- touch controls -->
+  <div class="touch" aria-hidden="true">
+    <div class="pad">
+      <button type="button" (pointerdown)="press('left', true, $event)" (pointerup)="press('left', false)" (pointerleave)="press('left', false)" (pointercancel)="press('left', false)">◀</button>
+      <button type="button" (pointerdown)="press('right', true, $event)" (pointerup)="press('right', false)" (pointerleave)="press('right', false)" (pointercancel)="press('right', false)">▶</button>
+    </div>
+    <div class="pad">
+      <button type="button" class="brake" (pointerdown)="press('brake', true, $event)" (pointerup)="press('brake', false)" (pointerleave)="press('brake', false)" (pointercancel)="press('brake', false)">BRAKE</button>
+      <button type="button" class="gas" (pointerdown)="press('gas', true, $event)" (pointerup)="press('gas', false)" (pointerleave)="press('gas', false)" (pointercancel)="press('gas', false)">GAS</button>
+    </div>
+  </div>
+
+  <!-- ================= TITLE SCREEN ================= -->
+  @if (state() === 'title') {
+    <div class="overlay title">
+      <div class="title-card">
+        <p class="eyebrow">PORTFOLIO GRAND PRIX · ROUND 21</p>
+        <h1 class="logo"><span>DAMMU</span> <em>JAGADEESH</em></h1>
+        <p class="sub">{{ profile.role }} · {{ profile.tagline }}</p>
+        <div class="driver">
+          <div class="badge">#21</div>
+          <div class="dstats">
+            @for (s of stats; track s.label) {
+              <div><b>{{ s.value }}{{ s.suffix }}</b><span>{{ s.label }}</span></div>
+            }
+          </div>
+        </div>
+        <p class="mission">Your mission: drive one lap and pass the <b>4 sector gates</b>. Each gate unlocks part of my story.</p>
+        <div class="title-btns">
+          <button type="button" class="btn btn-red big" (click)="start()">▶ Start race</button>
+          <button type="button" class="btn btn-ghost" (click)="start(true)">🤖 Just watch (auto-drive)</button>
+        </div>
+        <p class="controls"><kbd>W A S D</kbd> / arrows to drive · <kbd>Enter</kbd> to start · touch pedals on phone</p>
+        <a class="skip" routerLink="/story">In a hurry? Open the classic site →</a>
+      </div>
+    </div>
+  }
+
+  <!-- ================= START LIGHTS ================= -->
+  @if (state() === 'lights') {
+    <div class="overlay lights-wrap" aria-live="polite">
+      <div class="lights">
+        @for (i of [0, 1, 2, 3, 4]; track i) {
+          <div class="col"><span class="bulb" [class.on]="litCount() > i"></span><span class="bulb" [class.on]="litCount() > i"></span></div>
+        }
+      </div>
+      <p>{{ litCount() < 5 ? 'GET READY' : 'HOLD…' }}</p>
+    </div>
+  }
+
+  <!-- ================= SECTOR PANELS ================= -->
+  @if (state() === 'panel' && panel() !== null) {
+    <div class="overlay">
+      <div class="panel" role="dialog" aria-modal="true" [style.--c]="gates[panel()!].color">
+        <div class="panel-head">
+          <span class="code">{{ gates[panel()!].code }}</span>
+          <div>
+            <small>SECTOR UNLOCKED · {{ doneCount() }}/4</small>
+            <h2>{{ gates[panel()!].title }}</h2>
+          </div>
+        </div>
+
+        <div class="panel-body">
+          @switch (panel()) {
+            @case (0) {
+              <div class="profile">
+                <div class="avatar">DJ<small>#21</small></div>
+                <div>
+                  <h3>{{ profile.name }}</h3>
+                  <p class="muted">{{ profile.role }} · {{ profile.location }}</p>
+                  <p>{{ profile.intro }}</p>
+                </div>
+              </div>
+              <div class="mini-stats">
+                @for (s of stats; track s.label) { <div><b>{{ s.value }}{{ s.suffix }}</b><span>{{ s.label }}</span></div> }
+              </div>
+              <h4>Career laps</h4>
+              <ol class="career">
+                @for (l of laps; track l.lap; let first = $first) {
+                  <li [class.now]="first"><b>{{ l.title }}</b><span>{{ l.period }}</span></li>
+                }
+              </ol>
+              <p class="open"><span class="dot"></span>Open to: {{ profile.openTo }}</p>
+            }
+            @case (1) {
+              <div class="skills">
+                @for (s of skills; track s.name; let i = $index) {
+                  <div class="skill" [style.--d]="i * 70 + 'ms'">
+                    <div class="sk-top"><span>{{ s.icon }} {{ s.name }}</span><b>{{ s.level }}</b></div>
+                    <div class="sk-bar"><span [style.--w]="s.level + '%'"></span></div>
+                    <small>{{ s.part }} · {{ s.tags.join(' · ') }}</small>
+                  </div>
+                }
+              </div>
+            }
+            @case (2) {
+              <p class="muted note">Work projects are described in words; the code belongs to my employer. Tap a car for its pit-stop report.</p>
+              <div class="projects">
+                @for (p of projects; track p.id; let i = $index) {
+                  <button type="button" class="proj" [class.open]="openProject() === p.id" (click)="toggleProject(p.id)"
+                          [attr.aria-expanded]="openProject() === p.id">
+                    <span class="pos" [style.background]="p.gradient">P{{ i + 1 }}</span>
+                    <span class="pt"><b>{{ p.icon }} {{ p.title }}</b><small>{{ p.summary }}</small></span>
+                  </button>
+                  @if (openProject() === p.id) {
+                    <div class="report">
+                      <p><span class="s s1">S1</span>{{ p.problem }}</p>
+                      <div><span class="s s2">S2</span><ul>@for (b of p.built; track b) { <li>{{ b }}</li> }</ul></div>
+                      <p><span class="s s3">S3</span>{{ p.result }}</p>
+                      <div class="chips">@for (s of p.stack; track s) { <span class="chip">{{ s }}</span> }</div>
+                      @if (p.link) { <a [href]="p.link" target="_blank" rel="noopener">View code on GitHub →</a> }
+                    </div>
+                  }
+                }
+              </div>
+            }
+            @case (3) {
+              <p>Hiring for a Full Stack or Angular + Java role? Box, box. Let's talk.</p>
+              <div class="channels">
+                <a [href]="'mailto:' + profile.email"><span>📧</span><b>Email</b><small>{{ profile.email }}</small></a>
+                <a [href]="profile.linkedin" target="_blank" rel="noopener"><span>🤝</span><b>LinkedIn</b><small>Dammu Jagadeesh</small></a>
+                <a [href]="profile.github" target="_blank" rel="noopener"><span>💻</span><b>GitHub</b><small>jagadeeshdammu</small></a>
+              </div>
+              <div class="board">
+                <div><span>Status</span><b class="green">● Open to offers</b></div>
+                <div><span>Notice period</span><b>30 days</b></div>
+                <div><span>Base</span><b>{{ profile.location }}</b></div>
+              </div>
+            }
+          }
+        </div>
+
+        <div class="panel-foot">
+          <a class="more" [routerLink]="gates[panel()!].route">Full page →</a>
+          <button type="button" class="btn btn-red" (click)="continueRace()">Continue race ⏎</button>
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- ================= CHEQUERED FLAG ================= -->
+  @if (state() === 'finish') {
+    <div class="overlay finish">
+      <div class="flag" aria-hidden="true"></div>
+      <div class="finish-card">
+        <p class="eyebrow">CHEQUERED FLAG</p>
+        <h2>P1 · RACE WON</h2>
+        <div class="ftime">{{ finalTime() }}</div>
+        @if (newBest()) { <p class="pb">★ NEW PERSONAL BEST ★</p> } @else { <p class="muted">Best: {{ best() }}</p> }
+        <p>You've seen the whole story. Now let's build something together.</p>
+        <div class="title-btns">
+          <a class="btn btn-red big" [href]="profile.linkedin" target="_blank" rel="noopener">Hire me on LinkedIn</a>
+          <a class="btn btn-ghost" [href]="'mailto:' + profile.email">Email me</a>
+        </div>
+        <div class="title-btns small">
+          <button type="button" class="link" (click)="start()">↻ Race again</button>
+          <a class="link" routerLink="/story">Classic site →</a>
+        </div>
+      </div>
+    </div>
+  }
+</div>

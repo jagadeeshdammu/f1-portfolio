@@ -11,12 +11,12 @@
     </div>
     <div class="actions">
       <button type="button" class="hbtn" [class.on]="auto()" (click)="toggleAuto()" title="Let the car drive itself">
-        <span aria-hidden="true">🤖</span><span class="lbl">Auto-drive</span>
+        <app-icon name="bot" [size]="18" /><span class="lbl">Auto-drive</span>
       </button>
       <button type="button" class="hbtn" (click)="toggleSound()" [attr.aria-label]="sound() ? 'Mute engine' : 'Engine sound on'">
-        {{ sound() ? '🔊' : '🔇' }}
+        <app-icon [name]="sound() ? 'volume' : 'mute'" [size]="18" />
       </button>
-      <a class="hbtn classic" routerLink="/story"><span class="lbl">Classic site</span><span class="short">Site</span> →</a>
+      <a class="hbtn classic" routerLink="/story"><span class="lbl">Classic site</span><span class="short">Site</span><app-icon name="arrow" [size]="16" /></a>
     </div>
   </div>
 
@@ -37,15 +37,15 @@
   @if (state() === 'race' && !touchedControls() && !auto()) {
     <div class="hint">
       <span class="keys"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> or arrow keys to drive</span>
-      <span>Hit the glowing gates to unlock each sector · or press 🤖 Auto-drive</span>
+      <span>Hit the glowing gates to unlock each sector · or press <app-icon name="bot" [size]="15" /> Auto-drive</span>
     </div>
   }
 
   <!-- touch controls -->
   <div class="touch" aria-hidden="true">
     <div class="pad">
-      <button type="button" (pointerdown)="press('left', true, $event)" (pointerup)="press('left', false)" (pointerleave)="press('left', false)" (pointercancel)="press('left', false)">◀</button>
-      <button type="button" (pointerdown)="press('right', true, $event)" (pointerup)="press('right', false)" (pointerleave)="press('right', false)" (pointercancel)="press('right', false)">▶</button>
+      <button type="button" (pointerdown)="press('left', true, $event)" (pointerup)="press('left', false)" (pointerleave)="press('left', false)" (pointercancel)="press('left', false)"><app-icon name="left" [size]="30" [stroke]="3" /></button>
+      <button type="button" (pointerdown)="press('right', true, $event)" (pointerup)="press('right', false)" (pointerleave)="press('right', false)" (pointercancel)="press('right', false)"><app-icon name="right" [size]="30" [stroke]="3" /></button>
     </div>
     <div class="pad">
       <button type="button" class="brake" (pointerdown)="press('brake', true, $event)" (pointerup)="press('brake', false)" (pointerleave)="press('brake', false)" (pointercancel)="press('brake', false)">BRAKE</button>
@@ -70,8 +70,8 @@
         </div>
         <p class="mission">Your mission: drive one lap and pass the <b>4 sector gates</b>. Each gate unlocks part of my story.</p>
         <div class="title-btns">
-          <button type="button" class="btn btn-red big" (click)="start()">▶ Start race</button>
-          <button type="button" class="btn btn-ghost" (click)="start(true)">🤖 Just watch (auto-drive)</button>
+          <button type="button" class="btn btn-red big" (click)="start()"><app-icon name="play" [size]="18" /> Start race</button>
+          <button type="button" class="btn btn-ghost" (click)="start(true)"><app-icon name="bot" [size]="18" /> Just watch (auto-drive)</button>
         </div>
         <p class="controls"><kbd>W A S D</kbd> / arrows to drive · <kbd>Enter</kbd> to start · touch pedals on phone</p>
         <a class="skip" routerLink="/story">In a hurry? Open the classic site →</a>
@@ -129,7 +129,7 @@
               <div class="skills">
                 @for (s of skills; track s.name; let i = $index) {
                   <div class="skill" [style.--d]="i * 70 + 'ms'">
-                    <div class="sk-top"><span>{{ s.icon }} {{ s.name }}</span><b>{{ s.level }}</b></div>
+                    <div class="sk-top"><span class="sk-name"><app-icon [name]="s.icon" [size]="18" /> {{ s.name }}</span><b>{{ s.level }}</b></div>
                     <div class="sk-bar"><span [style.--w]="s.level + '%'"></span></div>
                     <small>{{ s.part }} · {{ s.tags.join(' · ') }}</small>
                   </div>
@@ -142,8 +142,8 @@
                 @for (p of projects; track p.id; let i = $index) {
                   <button type="button" class="proj" [class.open]="openProject() === p.id" (click)="toggleProject(p.id)"
                           [attr.aria-expanded]="openProject() === p.id">
-                    <span class="pos" [style.background]="p.gradient">P{{ i + 1 }}</span>
-                    <span class="pt"><b>{{ p.icon }} {{ p.title }}</b><small>{{ p.summary }}</small></span>
+                    <span class="pos">P{{ i + 1 }}</span>
+                    <span class="pic" [style.background]="p.gradient"><app-icon [name]="p.icon" [size]="22" /></span><span class="pt"><b>{{ p.title }}</b><small>{{ p.summary }}</small></span>
                   </button>
                   @if (openProject() === p.id) {
                     <div class="report">
@@ -160,9 +160,9 @@
             @case (3) {
               <p>Hiring for a Full Stack or Angular + Java role? Box, box. Let's talk.</p>
               <div class="channels">
-                <a [href]="'mailto:' + profile.email"><span>📧</span><b>Email</b><small>{{ profile.email }}</small></a>
-                <a [href]="profile.linkedin" target="_blank" rel="noopener"><span>🤝</span><b>LinkedIn</b><small>Dammu Jagadeesh</small></a>
-                <a [href]="profile.github" target="_blank" rel="noopener"><span>💻</span><b>GitHub</b><small>jagadeeshdammu</small></a>
+                <a [href]="'mailto:' + profile.email"><span class="ci"><app-icon name="mail" [size]="26" /></span><b>Email</b><small>{{ profile.email }}</small></a>
+                <a [href]="profile.linkedin" target="_blank" rel="noopener"><span class="ci"><app-icon name="linkedin" [size]="26" /></span><b>LinkedIn</b><small>Dammu Jagadeesh</small></a>
+                <a [href]="profile.github" target="_blank" rel="noopener"><span class="ci"><app-icon name="github" [size]="26" /></span><b>GitHub</b><small>jagadeeshdammu</small></a>
               </div>
               <div class="board">
                 <div><span>Status</span><b class="green">● Open to offers</b></div>
@@ -175,7 +175,7 @@
 
         <div class="panel-foot">
           <a class="more" [routerLink]="gates[panel()!].route">Full page →</a>
-          <button type="button" class="btn btn-red" (click)="continueRace()">Continue race ⏎</button>
+          <button type="button" class="btn btn-red" (click)="continueRace()">Continue race <app-icon name="arrow" [size]="16" /></button>
         </div>
       </div>
     </div>
@@ -189,14 +189,14 @@
         <p class="eyebrow">CHEQUERED FLAG</p>
         <h2>P1 · RACE WON</h2>
         <div class="ftime">{{ finalTime() }}</div>
-        @if (newBest()) { <p class="pb">★ NEW PERSONAL BEST ★</p> } @else { <p class="muted">Best: {{ best() }}</p> }
+        @if (newBest()) { <p class="pb"><app-icon name="trophy" [size]="18" /> NEW PERSONAL BEST</p> } @else { <p class="muted">Best: {{ best() }}</p> }
         <p>You've seen the whole story. Now let's build something together.</p>
         <div class="title-btns">
-          <a class="btn btn-red big" [href]="profile.linkedin" target="_blank" rel="noopener">Hire me on LinkedIn</a>
-          <a class="btn btn-ghost" [href]="'mailto:' + profile.email">Email me</a>
+          <a class="btn btn-red big" [href]="profile.linkedin" target="_blank" rel="noopener"><app-icon name="linkedin" [size]="18" /> Hire me on LinkedIn</a>
+          <a class="btn btn-ghost" [href]="'mailto:' + profile.email"><app-icon name="mail" [size]="18" /> Email me</a>
         </div>
         <div class="title-btns small">
-          <button type="button" class="link" (click)="start()">↻ Race again</button>
+          <button type="button" class="link" (click)="start()"><app-icon name="restart" [size]="16" /> Race again</button>
           <a class="link" routerLink="/story">Classic site →</a>
         </div>
       </div>

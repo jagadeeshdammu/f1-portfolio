@@ -47,44 +47,87 @@ import { RevealDirective } from '../../shared/reveal.directive';
       </div>
 
       <div class="car" aria-hidden="true">
-        <svg viewBox="0 0 420 110">
+        <svg viewBox="0 0 640 170">
           <defs>
-            <linearGradient id="body" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#ff3b30" />
-              <stop offset=".55" stop-color="#e10600" />
-              <stop offset="1" stop-color="#7a0000" />
+            <linearGradient id="cb" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#ff4a3d" />
+              <stop offset=".45" stop-color="#e10600" />
+              <stop offset="1" stop-color="#6e0000" />
             </linearGradient>
+            <linearGradient id="cf" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#0c0c10" />
+              <stop offset="1" stop-color="#26262e" />
+            </linearGradient>
+            <linearGradient id="gl" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#fff" stop-opacity=".55" />
+              <stop offset="1" stop-color="#fff" stop-opacity="0" />
+            </linearGradient>
+            <radialGradient id="hl" cx=".35" cy=".35" r=".7">
+              <stop offset="0" stop-color="#fff7b0" />
+              <stop offset=".5" stop-color="#ffd400" />
+              <stop offset="1" stop-color="#8f6a00" />
+            </radialGradient>
+            <radialGradient id="rim" cx=".5" cy=".5" r=".5">
+              <stop offset="0" stop-color="#3a3a44" />
+              <stop offset=".7" stop-color="#15151b" />
+              <stop offset="1" stop-color="#050507" />
+            </radialGradient>
           </defs>
-          <ellipse cx="205" cy="100" rx="190" ry="7" fill="rgba(0,0,0,.6)" />
-          <!-- rear wing -->
-          <rect x="8" y="16" width="44" height="10" rx="2" fill="url(#body)" />
-          <rect x="8" y="27" width="44" height="4" fill="#111" />
-          <rect x="27" y="30" width="7" height="34" fill="#1a1a1a" />
-          <!-- body -->
-          <path d="M40 78 L44 58 Q70 40 112 38 L150 36 Q170 22 196 36 L250 44 Q320 56 384 70 L388 80 Z" fill="url(#body)" />
-          <path d="M110 60 L240 56 Q300 60 360 72 L110 76 Z" fill="#8a0000" opacity=".55" />
-          <path d="M60 66 L380 74" stroke="#fff" stroke-width="2.5" opacity=".9" />
-          <!-- halo and helmet -->
-          <circle cx="176" cy="36" r="11" fill="#ffd400" />
-          <rect x="168" y="31" width="14" height="5" rx="2" fill="#111" />
-          <path d="M150 38 Q178 16 214 40" stroke="#222" stroke-width="5" fill="none" stroke-linecap="round" />
-          <!-- number -->
-          <text x="232" y="62" font-family="Orbitron, sans-serif" font-weight="900" font-size="20" fill="#fff" font-style="italic">21</text>
-          <!-- front wing -->
-          <path d="M340 82 L414 82 L414 90 L332 90 Z" fill="url(#body)" />
-          <rect x="406" y="70" width="8" height="20" fill="#111" />
-          <!-- wheels -->
-          <g class="wheel" style="transform-origin: 92px 78px">
-            <circle cx="92" cy="78" r="24" fill="#0d0d0d" />
-            <circle cx="92" cy="78" r="17" fill="none" stroke="#ffd400" stroke-width="2" />
-            <path d="M92 64 V92 M78 78 H106" stroke="#444" stroke-width="3" />
-            <circle cx="92" cy="78" r="5" fill="#666" />
+          <ellipse cx="320" cy="156" rx="300" ry="9" fill="rgba(0,0,0,.65)" />
+          <!-- floor / plank -->
+          <path d="M70 132 L560 132 L585 126 L80 124 Z" fill="#0d0d12" />
+          <!-- rear wing: endplate, mainplane, DRS flap, beam wing -->
+          <path d="M28 26 L62 26 L70 112 L40 112 Z" fill="url(#cf)" />
+          <path d="M22 30 Q60 22 104 30 L104 40 Q60 33 22 41 Z" fill="url(#cb)" />
+          <path d="M26 45 Q62 38 100 45 L100 52 Q62 46 26 53 Z" fill="#111" />
+          <path d="M50 96 L104 92 L104 99 L50 103 Z" fill="#1a1a20" />
+          <text x="38" y="38" font-family="Orbitron, sans-serif" font-weight="900" font-size="8" fill="#fff" opacity=".9">DJ</text>
+          <!-- engine cover with fin and airbox -->
+          <path d="M80 104 L96 62 Q180 48 262 40 L282 40 L290 58 L300 66 L250 108 Z" fill="url(#cb)" />
+          <path d="M96 62 Q170 52 248 44 L252 54 Q175 60 104 74 Z" fill="#14141a" opacity=".85" />
+          <path d="M248 34 Q266 30 282 40 L262 46 Z" fill="#111" />
+          <!-- sidepod with undercut + louvres -->
+          <path d="M150 112 Q160 74 220 72 L330 74 Q350 78 352 94 L345 116 L170 118 Z" fill="url(#cb)" />
+          <path d="M180 108 Q200 96 330 98 L340 112 L180 116 Z" fill="#7a0000" opacity=".7" />
+          <path d="M322 76 L350 80 L352 94 L330 92 Z" fill="#08080b" />
+          <g stroke="rgba(0,0,0,.45)" stroke-width="2">
+            <path d="M200 80 L196 92" /><path d="M212 79 L208 91" /><path d="M224 78 L220 90" /><path d="M236 78 L232 90" />
           </g>
-          <g class="wheel" style="transform-origin: 318px 80px">
-            <circle cx="318" cy="80" r="21" fill="#0d0d0d" />
-            <circle cx="318" cy="80" r="14" fill="none" stroke="#ffd400" stroke-width="2" />
-            <path d="M318 68 V92 M306 80 H330" stroke="#444" stroke-width="3" />
-            <circle cx="318" cy="80" r="4" fill="#666" />
+          <!-- monocoque + nose -->
+          <path d="M280 68 Q330 62 380 74 L520 98 Q570 106 600 112 L600 118 L520 118 L300 116 Z" fill="url(#cb)" />
+          <!-- livery stripes -->
+          <path d="M120 86 Q240 70 360 78 L600 114" stroke="#fff" stroke-width="3" fill="none" />
+          <path d="M140 94 Q250 84 360 88 L560 114" stroke="#ffd400" stroke-width="1.6" fill="none" opacity=".9" />
+          <text x="400" y="100" font-family="Orbitron, sans-serif" font-weight="900" font-size="22" font-style="italic" fill="#fff">21</text>
+          <!-- cockpit, helmet, halo -->
+          <path d="M282 66 L344 66 L338 74 L286 74 Z" fill="#050507" />
+          <circle cx="308" cy="60" r="14" fill="url(#hl)" />
+          <path d="M310 54 Q322 55 322 63 L310 64 Z" fill="#101014" />
+          <path d="M268 64 Q300 34 350 60 L356 74 L350 74 Q302 48 276 70 Z" fill="#1b1b22" />
+          <path d="M336 52 L346 50 L348 56 L338 58 Z" fill="#16161c" />
+          <!-- front wing: three elements + endplate -->
+          <path d="M488 122 Q550 114 628 118 L628 124 L486 128 Z" fill="url(#cb)" />
+          <path d="M500 114 Q560 106 624 110 L624 115 L500 120 Z" fill="#111" />
+          <path d="M512 106 Q566 100 620 103 L620 107 L512 112 Z" fill="#ff3b30" />
+          <path d="M612 92 L632 92 L634 130 L612 130 Z" fill="url(#cf)" />
+          <!-- gloss -->
+          <path d="M100 62 Q200 46 280 44 L300 62 Q380 66 520 92 L520 96 Q380 72 300 70 Q200 60 110 72 Z" fill="url(#gl)" opacity=".5" />
+          <!-- wheels: 18-inch with aero covers -->
+          <g class="wheel" style="transform-origin: 140px 118px">
+            <circle cx="140" cy="118" r="40" fill="#0a0a0c" />
+            <circle cx="140" cy="118" r="38" fill="none" stroke="#ffd400" stroke-width="2.5" />
+            <circle cx="140" cy="118" r="27" fill="url(#rim)" />
+            <circle cx="140" cy="118" r="27" fill="none" stroke="#e10600" stroke-width="2" />
+            <path d="M140 94 V142 M116 118 H164 M123 101 L157 135 M157 101 L123 135" stroke="#2b2b33" stroke-width="3" />
+            <circle cx="140" cy="118" r="6" fill="#e10600" />
+          </g>
+          <g class="wheel" style="transform-origin: 480px 120px">
+            <circle cx="480" cy="120" r="36" fill="#0a0a0c" />
+            <circle cx="480" cy="120" r="34" fill="none" stroke="#ffd400" stroke-width="2.5" />
+            <circle cx="480" cy="120" r="24" fill="url(#rim)" />
+            <circle cx="480" cy="120" r="24" fill="none" stroke="#e10600" stroke-width="2" />
+            <path d="M480 99 V141 M459 120 H501 M465 105 L495 135 M495 105 L465 135" stroke="#2b2b33" stroke-width="3" />
+            <circle cx="480" cy="120" r="5.5" fill="#e10600" />
           </g>
         </svg>
       </div>

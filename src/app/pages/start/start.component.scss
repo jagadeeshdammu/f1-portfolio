@@ -81,7 +81,7 @@
 @keyframes fade-up { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
 
 /* the car: flies past at lights out, comes back and parks */
-.car { position: absolute; bottom: 4%; left: -70%; width: min(520px, 78vw); z-index: 1; pointer-events: none;
+.car { position: absolute; bottom: 3%; left: -70%; width: min(640px, 86vw); z-index: 1; pointer-events: none;
   filter: drop-shadow(0 10px 30px rgba(225,6,0,.35)); }
 .car svg { width: 100%; height: auto; display: block; }
 .car::before { content: ''; position: absolute; right: 92%; top: 46%; height: 30%; width: 0;

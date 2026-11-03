@@ -51,42 +51,42 @@ export const STATS = [
 
 export const SKILLS: Skill[] = [
   {
-    part: 'Engine', icon: '🏎️', name: 'Angular', level: 92,
+    part: 'Engine', icon: 'code', name: 'Angular', level: 92,
     detail: 'Angular 2+ to 21: standalone components, signals, new control flow, lazy routes, SSR/PWA.',
     tags: ['Signals', 'Standalone', '@if / @for', 'Lazy loading'],
   },
   {
-    part: 'Gearbox', icon: '⚙️', name: 'TypeScript & RxJS', level: 85,
+    part: 'Gearbox', icon: 'workflow', name: 'TypeScript & RxJS', level: 85,
     detail: 'Reactive data flow with RxJS operators, typed models and clean services.',
     tags: ['switchMap', 'BehaviorSubject', 'debounceTime'],
   },
   {
-    part: 'Power Unit', icon: '☕', name: 'Java & Spring Boot', level: 78,
+    part: 'Power Unit', icon: 'server', name: 'Java & Spring Boot', level: 78,
     detail: 'REST APIs, Spring Data JPA, validation and exception handling for ERP modules.',
     tags: ['REST', 'JPA', '@Transactional'],
   },
   {
-    part: 'Fuel System', icon: '🛢️', name: 'MySQL & MongoDB', level: 75,
+    part: 'Fuel System', icon: 'database', name: 'MySQL & MongoDB', level: 75,
     detail: 'Schema design, joins and aggregation for fees, admissions and reporting.',
     tags: ['Joins', 'Indexes', 'Aggregation'],
   },
   {
-    part: 'Pit Wall', icon: '💳', name: 'Payment Gateways', level: 82,
+    part: 'Pit Wall', icon: 'card', name: 'Payment Gateways', level: 82,
     detail: 'EMI and UPI integrations, webhooks and fee-head to bank-account settlement.',
     tags: ['GrayQuest', 'PayU', 'PhonePe UPI', 'Webhooks'],
   },
   {
-    part: 'Chassis', icon: '🎨', name: 'HTML, SCSS & Bootstrap', level: 88,
+    part: 'Chassis', icon: 'palette', name: 'HTML, SCSS & Bootstrap', level: 88,
     detail: 'Responsive, accessible layouts that work from phone to desktop.',
     tags: ['Responsive', 'SCSS', 'Bootstrap'],
   },
   {
-    part: 'Telemetry', icon: '🧪', name: 'Testing & Tools', level: 65,
+    part: 'Telemetry', icon: 'flask', name: 'Testing & Tools', level: 65,
     detail: 'Jasmine/Karma unit tests, Git workflows, Postman and AWS basics.',
     tags: ['Jasmine', 'Git', 'Postman', 'AWS'],
   },
   {
-    part: 'Race Engineer', icon: '🤖', name: 'AI-assisted Dev', level: 70,
+    part: 'Race Engineer', icon: 'sparkles', name: 'AI-assisted Dev', level: 70,
     detail: 'Using AI coding assistants to move faster, then reviewing and testing every line.',
     tags: ['Copilot', 'Claude', 'Code review'],
   },
@@ -113,7 +113,7 @@ export const LAPS: Lap[] = [
 
 export const PROJECTS: Project[] = [
   {
-    id: 'payments', icon: '💳', title: 'Payments Module', team: 'Knowvo · School ERP',
+    id: 'payments', icon: 'card', title: 'Payments Module', team: 'Knowvo · School ERP',
     summary: 'Online fee payments with EMI and UPI, settled to the right school bank accounts.',
     problem: 'Schools collect many fee heads, and each one has to reach a specific trust or school account.',
     built: ['Integrated GrayQuest EMI, PayU and PhonePe UPI', 'Webhook handling with idempotent status updates', 'Fee-head to bank-account mapping and reconciliation views'],
@@ -122,7 +122,7 @@ export const PROJECTS: Project[] = [
     gradient: 'linear-gradient(135deg,#e10600,#7a0000)',
   },
   {
-    id: 'erp', icon: '🏫', title: 'School ERP: Admissions & Fees', team: 'Knowvo',
+    id: 'erp', icon: 'school', title: 'School ERP: Admissions & Fees', team: 'Knowvo',
     summary: 'Admissions and fee management for a multi-school ERP, from form to receipt.',
     problem: 'Admissions and fee collection were spread across manual steps and spreadsheets.',
     built: ['Admission workflows with role-based access', 'Fee structures, due dates and receipts', 'Production fix for wrong due dates in fee allocation'],
@@ -131,7 +131,7 @@ export const PROJECTS: Project[] = [
     gradient: 'linear-gradient(135deg,#00a19c,#004d4a)',
   },
   {
-    id: 'b2b', icon: '🛰️', title: 'B2B Portal', team: 'Knowvo',
+    id: 'b2b', icon: 'network', title: 'B2B Portal', team: 'Knowvo',
     summary: 'Partner portal built on Angular 21 with standalone components and signals.',
     problem: 'Partners needed a fast, modern portal to manage orders and accounts.',
     built: ['Standalone components and signal-based state', 'New control flow (@if / @for) and lazy-loaded routes', 'Reusable UI kit for forms and tables'],
@@ -140,7 +140,7 @@ export const PROJECTS: Project[] = [
     gradient: 'linear-gradient(135deg,#1e5bc6,#2b1a7a)',
   },
   {
-    id: 'ecommerce', icon: '🛒', title: 'E-Commerce for Schools', team: 'Knowvo',
+    id: 'ecommerce', icon: 'cart', title: 'E-Commerce for Schools', team: 'Knowvo',
     summary: 'Vendor management with payment integration and inventory tracking.',
     problem: 'Schools needed to sell books and uniforms online without manual tracking.',
     built: ['Vendor and catalogue management', 'Cart and checkout with payment gateway', 'Stock tracking per school'],
@@ -149,7 +149,7 @@ export const PROJECTS: Project[] = [
     gradient: 'linear-gradient(135deg,#ff8700,#a83c00)',
   },
   {
-    id: 'lms', icon: '📚', title: 'LMS + CMDS', team: 'Knowvo',
+    id: 'lms', icon: 'book', title: 'LMS + CMDS', team: 'Knowvo',
     summary: 'Learning and content management with user roles and analytics.',
     problem: 'Teachers and admins needed one place to publish content and track usage.',
     built: ['Role-based content publishing', 'Usage dashboards and PDF reports', 'Client builds for test-prep platforms'],
@@ -158,7 +158,7 @@ export const PROJECTS: Project[] = [
     gradient: 'linear-gradient(135deg,#00d26a,#0a5a33)',
   },
   {
-    id: 'students', icon: '🧑‍🎓', title: 'Student Management System', team: 'Open source',
+    id: 'students', icon: 'grad', title: 'Student Management System', team: 'Open source',
     summary: 'Angular CRUD app to add, edit, delete and search student records.',
     problem: 'A practice project to master Angular forms, routing and services.',
     built: ['Reactive forms with validation', 'Service-based state and routing', 'Clean, responsive UI'],

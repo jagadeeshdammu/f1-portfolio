@@ -4,6 +4,11 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: '',
+    title: 'Dammu Jagadeesh · Portfolio Grand Prix',
+    loadComponent: () => import('./pages/game/game.component').then((m) => m.GameComponent),
+  },
+  {
+    path: 'story',
     title: 'Dammu Jagadeesh · Start Line',
     loadComponent: () => import('./pages/start/start.component').then((m) => m.StartComponent),
   },

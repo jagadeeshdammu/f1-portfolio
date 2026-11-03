@@ -84,8 +84,58 @@ h1, h2, h3 { font-family: var(--display); letter-spacing: 0.02em; margin: 0; }
   background-size: 14px 14px; opacity: 0.85;
 }
 
+/* ---------- scroll reveal (see shared/reveal.directive.ts) ---------- */
+.reveal-el {
+  opacity: 0;
+  transition: opacity .8s cubic-bezier(.2,.7,.2,1) var(--rd, 0ms),
+              transform .9s cubic-bezier(.2,.7,.2,1) var(--rd, 0ms),
+              filter .8s ease var(--rd, 0ms);
+}
+.reveal-el[data-reveal='up'] { transform: translateY(46px); }
+.reveal-el[data-reveal='left'] { transform: translateX(-80px) skewX(8deg); }
+.reveal-el[data-reveal='right'] { transform: translateX(80px) skewX(-8deg); }
+.reveal-el[data-reveal='zoom'] { transform: scale(.82); filter: blur(8px); }
+.reveal-el.in { opacity: 1; transform: none; filter: none; }
+
+/* ---------- animated section headings ---------- */
+.page-head .kicker { animation: kicker-in .7s cubic-bezier(.2,.7,.2,1) both; }
+.page-head h1 { animation: head-in .9s cubic-bezier(.2,.7,.2,1) .1s both; }
+.page-head p { animation: head-in .9s cubic-bezier(.2,.7,.2,1) .25s both; }
+.page-head h1 span {
+  background: linear-gradient(100deg, var(--red) 0 40%, #ff9a94 50%, var(--red) 60% 100%);
+  background-size: 250% 100%; -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: shine 3.5s linear infinite;
+}
+@keyframes kicker-in { from { opacity: 0; transform: translateY(-14px) scale(.9); letter-spacing: .8em; } }
+@keyframes head-in { from { opacity: 0; transform: translateY(30px) skewX(-6deg); filter: blur(6px); } }
+@keyframes shine { from { background-position: 100% 0; } to { background-position: -150% 0; } }
+
+/* button sheen */
+.btn { position: relative; overflow: hidden; }
+.btn::after {
+  content: ''; position: absolute; inset: 0; transform: translateX(-120%) skewX(-20deg);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.35), transparent);
+  transition: transform .6s ease;
+}
+.btn:hover::after { transform: translateX(120%) skewX(-20deg); }
+
+/* ---------- route change: blur-slide like a car passing ---------- */
+::view-transition-old(root) { animation: vt-out .32s cubic-bezier(.4,0,1,1) both; }
+::view-transition-new(root) { animation: vt-in .5s cubic-bezier(0,0,.2,1) both; }
+@keyframes vt-out { to { opacity: 0; transform: translateX(-70px) skewX(6deg); filter: blur(6px); } }
+@keyframes vt-in { from { opacity: 0; transform: translateX(90px) skewX(-6deg); filter: blur(6px); } }
+
+::selection { background: var(--red); color: #fff; }
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: linear-gradient(var(--red), #600); border-radius: 10px; }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
+  .reveal-el { opacity: 1; transform: none; filter: none; }
+  ::view-transition-old(root), ::view-transition-new(root) { animation: none !important; }
 }
 
 :focus-visible { outline: 2px solid var(--yellow); outline-offset: 3px; }
+
+main { display: block; overflow-x: clip; }

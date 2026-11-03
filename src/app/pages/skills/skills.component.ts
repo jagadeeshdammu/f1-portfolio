@@ -1,11 +1,13 @@
 import { Component, OnDestroy, OnInit, computed, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { SKILLS, Skill } from '../../data/profile.data';
+import { IconComponent } from '../../shared/icon.component';
+
 
 @Component({
   selector: 'app-skills',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, IconComponent],
   template: `
     <section class="page container">
       <div class="page-head">
@@ -26,7 +28,7 @@ import { SKILLS, Skill } from '../../data/profile.data';
           <button type="button" class="card" [class.sel]="selected()?.name === s.name" (click)="select(s)">
             <div class="top">
               <span class="part">{{ s.part }}</span>
-              <span class="icon" aria-hidden="true">{{ s.icon }}</span>
+              <span class="icon"><app-icon [name]="s.icon" [size]="22" /></span>
             </div>
             <svg class="gauge" viewBox="0 0 120 70" aria-hidden="true">
               <path d="M10 62 A50 50 0 0 1 110 62" class="track" />
@@ -42,7 +44,7 @@ import { SKILLS, Skill } from '../../data/profile.data';
       @if (selected(); as s) {
         <div class="setup" aria-live="polite">
           <div class="setup-head">
-            <span class="icon">{{ s.icon }}</span>
+            <span class="icon"><app-icon [name]="s.icon" [size]="28" /></span>
             <div>
               <div class="part">{{ s.part }} setup</div>
               <h2>{{ s.name }}</h2>

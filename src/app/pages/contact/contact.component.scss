@@ -19,7 +19,8 @@ small { color: #ff8a84; margin-top: 4px; font-weight: 600; }
 .chan { display: flex; gap: 14px; align-items: center; text-decoration: none; background: var(--panel);
   border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 18px; transition: .2s; min-width: 0; }
 .chan:hover { border-color: var(--red); transform: translateX(4px); }
-.chan .ic { font-size: 24px; }
+.chan .ic { width: 46px; height: 46px; flex: 0 0 46px; border-radius: 12px; display: grid; place-items: center; color: var(--red-2);
+  background: rgba(225,6,0,.1); border: 1px solid rgba(225,6,0,.35); }
 .chan span:last-child { display: flex; flex-direction: column; color: var(--muted); overflow-wrap: anywhere; min-width: 0; }
 .chan b { color: var(--text); font-family: var(--display); font-size: 13px; letter-spacing: .1em; }
 

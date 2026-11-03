@@ -1,11 +1,13 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PROFILE } from '../../data/profile.data';
+import { IconComponent } from '../../shared/icon.component';
+
 
 @Component({
   selector: 'app-contact',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, IconComponent],
   template: `
     <section class="page container">
       <div class="page-head">
@@ -30,7 +32,7 @@ import { PROFILE } from '../../data/profile.data';
           <textarea id="msg" rows="5" formControlName="message" placeholder="Role, team and location..."></textarea>
           @if (showError('message')) { <small>A few words (at least 10 characters), please.</small> }
 
-          <button class="btn btn-red send" type="submit">Box, box: send message</button>
+          <button class="btn btn-red send" type="submit"><app-icon name="send" [size]="18" /> Box, box: send message</button>
           @if (sent()) {
             <p class="ok">Your email app is opening with the message ready. Copy received!</p>
           }
@@ -38,13 +40,13 @@ import { PROFILE } from '../../data/profile.data';
 
         <div class="side">
           <a class="chan" [href]="'mailto:' + profile.email">
-            <span class="ic">📧</span><span><b>Email</b>{{ profile.email }}</span>
+            <span class="ic"><app-icon name="mail" [size]="24" /></span><span><b>Email</b>{{ profile.email }}</span>
           </a>
           <a class="chan" [href]="profile.linkedin" target="_blank" rel="noopener">
-            <span class="ic">🤝</span><span><b>LinkedIn</b>Dammu Jagadeesh</span>
+            <span class="ic"><app-icon name="linkedin" [size]="24" /></span><span><b>LinkedIn</b>Dammu Jagadeesh</span>
           </a>
           <a class="chan" [href]="profile.github" target="_blank" rel="noopener">
-            <span class="ic">💻</span><span><b>GitHub</b>github.com/jagadeeshdammu</span>
+            <span class="ic"><app-icon name="github" [size]="24" /></span><span><b>GitHub</b>github.com/jagadeeshdammu</span>
           </a>
 
           <div class="board">

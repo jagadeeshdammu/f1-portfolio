@@ -6,7 +6,8 @@ Portfolio of **Dammu Jagadeesh**, Full Stack Developer (Angular · Java · Sprin
 
 | Page | What's there |
 |---|---|
-| 🚦 **Start Line** | F1 start-light sequence, animated stats, career "race history" (Intern → SDE III) |
+| 🎮 **Play (home)** | A playable top-down F1 game on canvas: drive (WASD / arrows / touch pedals) through 4 sector gates that unlock my profile, skills, projects and contact. Live speedo, lap timer, minimap, DRS boost pads, skid marks, engine sound, auto-drive and best-lap memory |
+| 🚦 **Story** | Start lights, a car fly-by over a 3D track, letter-by-letter name reveal, live-timing ticker, scroll-reveal career timeline |
 | 🔧 **Skills Garage** | Each skill as a car part with an animated rev gauge, filters and a setup panel |
 | 🏁 **Projects Pit Stop** | Project cards that open a 3-sector pit-stop report: problem, what I built, result |
 | 📻 **Finish Line** | Validated contact form (reactive forms) + contact channels |

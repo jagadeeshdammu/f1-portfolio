@@ -1,11 +1,13 @@
 import { Component, HostListener, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { PROJECTS, Project } from '../../data/profile.data';
+import { IconComponent } from '../../shared/icon.component';
+
 
 @Component({
   selector: 'app-projects',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, IconComponent],
   template: `
     <section class="page container">
       <div class="page-head">
@@ -19,7 +21,7 @@ import { PROJECTS, Project } from '../../data/profile.data';
           <button type="button" class="card" (click)="open(p)" [style.animation-delay.ms]="i * 80">
             <div class="banner" [style.background]="p.gradient">
               <span class="pos">P{{ i + 1 }}</span>
-              <span class="emoji" aria-hidden="true">{{ p.icon }}</span>
+              <span class="emoji"><app-icon [name]="p.icon" [size]="54" [stroke]="1.5" /></span>
             </div>
             <div class="body">
               <div class="team">{{ p.team }}</div>
@@ -39,8 +41,8 @@ import { PROJECTS, Project } from '../../data/profile.data';
       <div class="overlay" (click)="close()">
         <div class="modal" role="dialog" aria-modal="true" [attr.aria-label]="p.title" (click)="$event.stopPropagation()">
           <div class="m-banner" [style.background]="p.gradient">
-            <span class="emoji">{{ p.icon }}</span>
-            <button type="button" class="x" aria-label="Close" (click)="close()">✕</button>
+            <span class="emoji"><app-icon [name]="p.icon" [size]="64" [stroke]="1.5" /></span>
+            <button type="button" class="x" aria-label="Close" (click)="close()"><app-icon name="close" [size]="18" /></button>
           </div>
           <div class="m-body">
             <div class="team">{{ p.team }}</div>
